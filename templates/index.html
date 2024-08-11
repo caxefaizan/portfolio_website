@@ -69,12 +69,12 @@
         <div class="col-lg-7 col-md-12 col-12 d-flex align-items-center">
           <div class="about-text">
             <h1 class="animated animated-text">
-              <span class="mr-2">Hey folks, working with</span>
-              <div class="animated-info">
+              <span class="mr-2">Hey folks, working with</span><br>
+              <marquee scrollamount="18">
                 {% for skill in data['skillset']['frameworks'] %}
-                <span class="animated-item">{{ skill }}?</span>
+                <span class="animated-item">{{ skill }} | </span>
                 {% endfor %}
-              </div>
+              </marquee>
             </h1>
 
             <p>Streamlining businesses with optimized workflows and efficient processes.</p>
@@ -224,6 +224,17 @@
           {% for crt in data['certifications'] %}
           <li>{{ crt }}</li>
           {% endfor %}
+
+          <h2 class="mb-4 mobile-mt-2">Languages</h2>
+          {% for lng in data['skillset']['languages'] %}
+          <li>{{ lng }}</li>
+          {% endfor %}
+
+          <h2 class="mb-4 mobile-mt-2">Cloud</h2>
+          {% for cld in data['skillset']['cloud'] %}
+          <li>{{ cld }}</li>
+          {% endfor %}
+
         </div>
 
       </div>
@@ -331,6 +342,7 @@
   <script src="./static/js/owl.carousel.min.js"></script>
   <script src="./static/js/smoothscroll.js"></script>
   <script src="./static/js/custom.js"></script>
+  <script src="./static/js/old.js"></script>
 
 </body>
 

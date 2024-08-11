@@ -141,7 +141,7 @@ strong {
   color: #ffc200;
 }
 
-.animated-item {
+/* .animated-item {
   font-size: 38px;
   line-height: inherit;
   display: block;
@@ -152,7 +152,7 @@ strong {
   right: 0;
   left: 0;
   animation: BottomTotop 6s linear infinite 0s;
-}
+} */
 
 .animated-item:nth-child(2n+2) {
   animation-delay: 2s;
