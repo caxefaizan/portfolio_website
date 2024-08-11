@@ -198,6 +198,7 @@
             </div>
             {% endfor %}
           </div>
+          <h2 class="mb-4 mobile-mt-2">Soft Skills</h2>
 
           <div class="timeline">
             {% for ss in data['softskills'] %}
@@ -226,14 +227,28 @@
           {% endfor %}
 
           <h2 class="mb-4 mobile-mt-2">Languages</h2>
-          {% for lng in data['skillset']['languages'] %}
-          <li>{{ lng }}</li>
-          {% endfor %}
+          <marquee scrollamount="10">
+            {% for lng in data['skillset']['languages'] %}
+            <div style="display: inline-block; padding-right: 20px;">
+              <img style="max-width: 75px; max-height: 75px; display:inline-block;"
+                src="./static/assets/images/logos/languages/{{ lng | lower | replace(' ','') }}.jpeg" alt="Logo"
+                class="logo">
+              <p style="text-align: center;">{{ lng }} </p>
+            </div>
+            {% endfor %}
+          </marquee>
 
           <h2 class="mb-4 mobile-mt-2">Cloud</h2>
-          {% for cld in data['skillset']['cloud'] %}
-          <li>{{ cld }}</li>
-          {% endfor %}
+          <marquee scrollamount="10">
+            {% for cld in data['skillset']['cloud'] %}
+            <div style="display: inline-block; padding-right: 20px;">
+              <img style="max-width: 75px; max-height: 75px; display:inline-block;"
+              src="./static/assets/images/logos/cloud/{{ cld | lower | replace(' ','') }}.jpeg" alt="Logo"
+              class="logo">
+              <p style="text-align: center;">{{ cld }} </p>
+            </div>  
+            {% endfor %}
+          </marquee>
 
         </div>
 
