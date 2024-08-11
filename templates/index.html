@@ -1,87 +1,334 @@
-<!DOCTYPE html>
+{% set skillset = ["Kubernetes", "Airflow"] %}
+<!doctype html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta content="IE=edge" http-equiv="X-UA-Compatible">
-  <meta content="width=device-width,initial-scale=1" name="viewport">
-  <meta content="description" name="description">
-  <meta name="google" content="notranslate" />
-  <meta content="Mashup templates have been developped by Orson.io team" name="author">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-  <!-- Disable tap highlight on IE -->
-  <meta name="msapplication-tap-highlight" content="no">
-  
-  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-  <!--<link href="./static/assets/favicon.ico" rel="icon"> -->
+  <title>Welcome</title>
 
-  <title>Welcome</title>  
+  <link rel="stylesheet" href="./static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./static/css/unicons.css">
+  <link rel="stylesheet" href="./static/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="./static/css/owl.theme.default.min.css">
 
-<link href="./static/main.3f6952e4.css" rel="stylesheet"></head>
+  <!-- MAIN STYLE -->
+  <link rel="stylesheet" href="./static/css/tooplate-style.css">
 
-<body class="minimal">
-<div id="site-border-left"></div>
-<div id="site-border-right"></div>
-<div id="site-border-top"></div>
-<div id="site-border-bottom"></div>
-<!-- Add your content of header -->
-<header>
-  <nav class="navbar  navbar-fixed-top navbar-inverse">
+</head>
+
+<body>
+
+  <!-- MENU -->
+  <nav class="navbar navbar-expand-sm navbar-light">
     <div class="container">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
+      <a class="navbar-brand" href="index.html"><i class='uil uil-user'></i>{{ data['basic']['name'] }}</a>
 
-      <div class="collapse navbar-collapse" id="navbar-collapse">
-        <ul class="nav navbar-nav ">
-          <li><a href="./index.html" title="">01 : Home</a></li>
-          <li><a href="./works.html" title="">02 : Works</a></li>
-          <li><a href="./about.html" title="">03 : About me</a></li>
-          <li><a href="./contact.html" title="">04 : Contact</a></li>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a href="#about" class="nav-link"><span data-hover="About">About</span></a>
+          </li>
+          <li class="nav-item">
+            <a href="#project" class="nav-link"><span data-hover="Projects">Projects</span></a>
+          </li>
+          <li class="nav-item">
+            <a href="#resume" class="nav-link"><span data-hover="Resume">Resume</span></a>
+          </li>
+          <li class="nav-item">
+            <a href="#contact" class="nav-link"><span data-hover="Contact">Contact</span></a>
+          </li>
         </ul>
 
-
-      </div> 
+        <ul class="navbar-nav ml-lg-auto">
+          <div class="ml-lg-4">
+            <div class="color-mode d-lg-flex justify-content-center align-items-center">
+              <i class="color-mode-icon"></i>
+              Color mode
+            </div>
+          </div>
+        </ul>
+      </div>
     </div>
   </nav>
-</header>
-<!-- Add your site or app content here -->
-  <div class="hero-full-container background-image-container white-text-container" style="background-image: url('./static/assets/images/background.jpg')">
+
+  <!-- ABOUT -->
+  <section class="about full-screen d-lg-flex justify-content-center align-items-center" id="about">
     <div class="container">
       <div class="row">
-        <div class="col-xs-12">
-          <div class="hero-full-wrapper">
-            <div class="text-content">
-              <h1>Hello there,<br>
-                <span id="typed-strings">
-                  <span>I'm Faizan Qazi</span>
-                  <span>M.Tech in Embedded Systems & Solutions</span>
-                  <span>A Programmer</span>
-                  <span>An Embedded IoT Solutions Developer</span>
-                  <span>A Full Stack Developer</span>
-                  <span>A Snowboarder</span>
-                  <span>And a Dancer</span>
-                </span>
-                <span id="typed"></span>
-              </h1>
+
+        <div class="col-lg-7 col-md-12 col-12 d-flex align-items-center">
+          <div class="about-text">
+            <h1 class="animated animated-text">
+              <span class="mr-2">Hey folks, working with</span>
+              <div class="animated-info">
+                {% for skill in data['skillset']['frameworks'] %}
+                <span class="animated-item">{{ skill }}?</span>
+                {% endfor %}
+              </div>
+            </h1>
+
+            <p>Streamlining businesses with optimized workflows and efficient processes.</p>
+
+            <div class="custom-btn-group mt-4">
+              <a href="./download/resume" class="btn mr-lg-2 custom-btn"><i class='uil uil-file-alt'></i> Download
+                Resume</a>
+              <a href="#contact" class="btn custom-btn custom-btn-bg custom-btn-link">Schedule Meeting</a>
             </div>
           </div>
         </div>
+
+        <div class="col-lg-5 col-md-12 col-12">
+          <div class="about-image svg">
+            <img src="./static/assets/images/undraw/undraw_software_engineer_lvl5.svg" class="img-fluid"
+              alt="svg image">
+          </div>
+        </div>
+
       </div>
     </div>
-  </div>
+  </section>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function (event) {
-     type();
-     movingBackgroundImage();
-  });
-</script>
+  <!-- PROJECTS -->
+  <section class="project py-5" id="project">
+    <div class="container">
 
+      <div class="row">
+        <div class="col-lg-11 text-center mx-auto col-12">
 
-<script type="text/javascript" src="./static/main.70a66962.js"></script></body>
+          <div class="col-lg-8 mx-auto">
+            <h2>Side Projects and Blogs</h2>
+          </div>
+
+          <div class="owl-carousel owl-theme">
+            <div class="item">
+              <div class="project-info">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/Ej2Nl4sNstw?si=H_w_koNLmtjSAMTV"
+                  title="YouTube video player" frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
+            </div>
+            <div class="item">
+              <div class="project-info">
+                <a href="https://www.udemy.com/course/abcd-airflow-23x-helm-eks-minikube/?referralCode=69BB02F9A1E166F639BD"
+                  target="_blank">
+                  <img src="./static/assets/images/projects/udemycourse.jpeg" alt="Course Thumbnail"
+                    class="img-fluid">A.B.C.D Apache Airflow 2.x on AWS - EKS | Minikube | Helm
+                </a>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="project-info">
+                <a href="https://medium.com/@caxefaizan/creating-custom-ui-for-airflow-7021c851631c" target="_blank">
+                  <img src="./static/assets/images/projects/mediumpost.jpeg" alt="Course Thumbnail"
+                    class="img-fluid">Creating Custom UI for Airflow
+                </a>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="resume py-5 d-lg-flex justify-content-center align-items-center" id="resume">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-6 col-12">
+          <h2 class="mb-4">Experience</h2>
+
+          <div class="timeline">
+            {% for experience in data['experiences'] %}\
+            {% set positions = experience["positions"] | length %}
+            <div class="timeline-wrapper">
+              <div class="timeline-yr">
+                <a href="{{ experience['url'] }}" target="_blank">
+                  <img src="./static/assets/images/logos/{{ experience['companyName'] | lower | replace(' ','') }}.jpeg"
+                    alt="Logo" class="logo">
+                </a>
+              </div>
+              <div class="timeline-info">
+                {% for pos in experience["positions"] %}
+                <h3><span>{{ pos['title'] }}</span><small>{{ pos['tenure']['from'] }} - {{ pos['tenure']['to']
+                    }}</small></h3>
+                {% endfor %}
+                <!-- Add description -->
+                {% for val in experience["description"]%}
+                <li>{{ val }}</li>
+                {% endfor %}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-12">
+          <h2 class="mb-4 mobile-mt-2">Education</h2>
+
+          <div class="timeline">
+            {% for education in data['educations'] %}
+            <div class="timeline-wrapper">
+              <div class="timeline-yr">
+                <a href="{{ education['url'] }}" target="_blank">
+                  <img src="./static/assets/images/logos/{{ education['institute'] | lower | replace(' ','') }}.jpeg"
+                    alt="Logo" class="logo">
+                </a>
+              </div>
+              <div class="timeline-info">
+                <h3><span>{{ education['title'] }}</span><small>{{ education['tenure']['from'] }} - {{
+                    education['tenure']['to'] }}</small></h3>
+                <p>{{ education['grade'] }}
+                </p>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+
+          <div class="timeline">
+            {% for ss in data['softskills'] %}
+            <div class="timeline-wrapper">
+              <div class="timeline-yr">
+                <a href="{{ ss['url'] }}" target="_blank">
+                  <img src="./static/assets/images/logos/{{ ss['companyName'] | lower | replace(' ','') }}.jpeg"
+                    alt="Logo" class="logo">
+                </a>
+              </div>
+              <div class="timeline-info">
+                <h3><span>{{ ss['title'] }}</span><small>{{ ss['tenure']['from'] }} - {{
+                    ss['tenure']['to'] }}</small></h3>
+                {% for val in ss['description'] %}
+                <li>{{ val }}
+                </li>
+                {% endfor %}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+
+          <h2 class="mb-4 mobile-mt-2">Certifications</h2>
+          {% for crt in data['certifications'] %}
+          <li>{{ crt }}</li>
+          {% endfor %}
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact py-5" id="contact">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-5 mr-lg-5 col-12">
+
+          <!-- For Map
+          <div class="google-map w-100">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12088.558402180099!2d-73.99373482142036!3d40.75895421922642!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855b8fb3083%3A0xa0f9aef176042a5c!2sTheater+District%2C+New+York%2C+NY%2C+USA!5e0!3m2!1sen!2smm!4v1549875377188"
+              width="400" height="300" frameborder="0" style="border:0" allowfullscreen>
+            </iframe>
+          </div> -->
+
+          <div class="contact-info d-flex justify-content-between align-items-center py-4 px-lg-5">
+            <div class="contact-info-item">
+              <h3 class="mb-3 text-white">Say hello</h3>
+              <p class="footer-text mb-0"></p>
+              <li>
+                <span class="fa-icon">
+                  <i class="fa fa-at" aria-hidden="true"></i>
+                </span>
+                <a href="mailto:{{ data['basic']['email'] }}">{{ data['basic']['email'] }}</a>
+              </li>
+              <li>
+                <span class="fa-icon">
+                  <i class="fa fa fa-map-marker" aria-hidden="true"></i>
+                </span>
+                {{ data['basic']['address'] }}
+              </li>
+            </div>
+
+            <ul class="social-links">
+              <li><a href="#" class="uil uil-instagram" data-toggle="tooltip" data-placement="left"
+                  title="Instagram"></a></li>
+              <li><a href="https://www.linkedin.com/in/caxefaizan" title="" class="fa-icon">
+                  <i class="fa fa-linkedin"></i></li>
+              </a>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="col-lg-6 col-12">
+          <div class="contact-form">
+            <h2 class="mb-4">Interested to work together? Let's talk</h2>
+
+            <form action="submit_form" method="post">
+              <div class="row">
+                <div class="col-lg-6 col-12">
+                  <input type="text" class="form-control" name="name" placeholder="Your Name" id="name">
+                </div>
+
+                <div class="col-lg-6 col-12">
+                  <input type="email" class="form-control" name="email" placeholder="Email" id="email">
+                </div>
+
+                <div class="col-12">
+                  <textarea name="message" rows="6" class="form-control" id="message" placeholder="Message"></textarea>
+                </div>
+
+                <div class="ml-lg-auto col-lg-5 col-12">
+                  <input type="submit" class="form-control submit-btn" value="Send">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer py-5">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-12 col-12">
+          <p class="copyright-text text-center">Copyright &copy; 2019 Company Name . All rights reserved</p>
+          <p class="copyright-text text-center">Designed by <a rel="nofollow"
+              href="https://www.facebook.com/tooplate">Tooplate</a></p>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <script src="./static/js/jquery-3.3.1.min.js"></script>
+  <script src="./static/js/popper.min.js"></script>
+  <script src="./static/js/bootstrap.min.js"></script>
+  <script src="./static/js/Headroom.js"></script>
+  <script src="./static/js/jQuery.headroom.js"></script>
+  <script src="./static/js/owl.carousel.min.js"></script>
+  <script src="./static/js/smoothscroll.js"></script>
+  <script src="./static/js/custom.js"></script>
+
+</body>
 
 </html>
