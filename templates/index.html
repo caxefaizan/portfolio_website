@@ -160,9 +160,14 @@
                     }}</small></h3>
                 {% endfor %}
                 <!-- Add description -->
-                {% for val in experience["description"]%}
-                <li>{{ val }}</li>
-                {% endfor %}
+                <div class="collapsible">
+                  <button class="toggle-button">Show Details</button>
+                  <div class="content">
+                      {% for val in experience["description"]%}
+                        <li>{{ val }}</li>
+                      {% endfor %}
+                  </div>
+                </div>
               </div>
             </div>
             {% endfor %}
@@ -341,6 +346,21 @@
     </div>
   </footer>
 
+  <script>
+    document.querySelectorAll('.toggle-button').forEach(function(button) {
+    button.addEventListener('click', function() {
+        const content = this.parentElement.querySelector('.content');
+        this.parentElement.classList.toggle('active');
+
+        if (this.parentElement.classList.contains('active')) {
+            this.textContent = 'Hide Details';
+        } else {
+            this.textContent = 'Show Details';
+        }
+    });
+});
+  </script>
+
   <script src="./static/js/jquery-3.3.1.min.js"></script>
   <script src="./static/js/popper.min.js"></script>
   <script src="./static/js/bootstrap.min.js"></script>
@@ -349,8 +369,6 @@
   <script src="./static/js/owl.carousel.min.js"></script>
   <script src="./static/js/smoothscroll.js"></script>
   <script src="./static/js/custom.js"></script>
-  <script src="./static/js/old.js"></script>
-
 </body>
 
 </html>

@@ -141,18 +141,32 @@ strong {
   color: #ffc200;
 }
 
-/* .animated-item {
-  font-size: 38px;
-  line-height: inherit;
-  display: block;
-  opacity: 0;
+.collapsible .content {
+  max-height: 0;
   overflow: hidden;
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  animation: BottomTotop 6s linear infinite 0s;
-} */
+  transition: max-height 0.3s ease-out;
+}
+
+.collapsible.active .content {
+  max-height: 500px;
+  transition: max-height 0.5s ease-in;
+}
+
+.toggle-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 1px 5px 1px 5px;
+  cursor: pointer;
+  font-size: 12px;
+  border-radius: 5px;
+  outline: none;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-button:hover {
+  background-color: #0056b3;
+}
 
 .animated-item:nth-child(2n+2) {
   animation-delay: 2s;
