@@ -24,7 +24,7 @@
   <!-- MENU -->
   <nav class="navbar navbar-expand-sm navbar-light">
     <div class="container">
-      <a class="navbar-brand" href="index.html"><i class='uil uil-user'></i>{{ data['basic']['name'] }}</a>
+      <a class="navbar-brand" href="/"><i class='uil uil-user'></i>{{ data['basic']['name'] }}</a>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -145,7 +145,7 @@
           <h2 class="mb-4">Experience</h2>
 
           <div class="timeline">
-            {% for experience in data['experiences'] %}\
+            {% for experience in data['experiences'] %}
             {% set positions = experience["positions"] | length %}
             <div class="timeline-wrapper">
               <div class="timeline-yr">
@@ -238,7 +238,7 @@
               src="./static/assets/images/logos/cloud/{{ cld | lower | replace(' ','') }}.jpeg" alt="Logo"
               class="logo">
               <p style="text-align: center;">{{ cld }} </p>
-            </div>  
+            </div>
             {% endfor %}
           </marquee>
 
@@ -300,7 +300,7 @@
 
         <div class="col-lg-6 col-12">
           <div class="contact-form">
-            <h2 class="mb-4">Interested to work together? Let's talk</h2>
+            <h2 class="mb-4">Excited to work together? Let's talk</h2>
 
             <form action="submit_form" method="post">
               <div class="row">
