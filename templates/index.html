@@ -118,25 +118,17 @@
                   referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
               </div>
             </div>
+            {% for link in data['externallinks'] %}
             <div class="item">
               <div class="project-info">
-                <a href="https://www.udemy.com/course/abcd-airflow-23x-helm-eks-minikube/?referralCode=69BB02F9A1E166F639BD"
+                <a href="{{ link['url'] }}"
                   target="_blank">
-                  <img src="./static/assets/images/projects/udemycourse.jpeg" alt="Course Thumbnail"
-                    class="img-fluid">A.B.C.D Apache Airflow 2.x on AWS - EKS | Minikube | Helm
+                  <img src="{{ link['imgsource'] }}" alt="Course Thumbnail"
+                    class="img-fluid" style="max-width: fit-content; max-height: fit-content; ">{{ link['title'] }}
                 </a>
               </div>
             </div>
-
-            <div class="item">
-              <div class="project-info">
-                <a href="https://medium.com/@caxefaizan/creating-custom-ui-for-airflow-7021c851631c" target="_blank">
-                  <img src="./static/assets/images/projects/mediumpost.jpeg" alt="Course Thumbnail"
-                    class="img-fluid">Creating Custom UI for Airflow
-                </a>
-              </div>
-            </div>
-
+            {% endfor %}
           </div>
 
         </div>
