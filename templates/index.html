@@ -172,29 +172,7 @@
             </div>
             {% endfor %}
           </div>
-        </div>
 
-        <div class="col-lg-6 col-12">
-          <h2 class="mb-4 mobile-mt-2">Education</h2>
-
-          <div class="timeline">
-            {% for education in data['educations'] %}
-            <div class="timeline-wrapper">
-              <div class="timeline-yr">
-                <a href="{{ education['url'] }}" target="_blank">
-                  <img src="./static/assets/images/logos/{{ education['institute'] | lower | replace(' ','') }}.jpeg"
-                    alt="Logo" class="logo">
-                </a>
-              </div>
-              <div class="timeline-info">
-                <h3><span>{{ education['title'] }}</span><small>{{ education['tenure']['from'] }} - {{
-                    education['tenure']['to'] }}</small></h3>
-                <p>{{ education['grade'] }}
-                </p>
-              </div>
-            </div>
-            {% endfor %}
-          </div>
           <h2 class="mb-4 mobile-mt-2">Soft Skills</h2>
 
           <div class="timeline">
@@ -218,12 +196,36 @@
             {% endfor %}
           </div>
 
+        </div>
+
+        <div class="col-lg-6 col-12">
+          <h2 class="mb-4 mobile-mt-2">Education</h2>
+
+          <div class="timeline">
+            {% for education in data['educations'] %}
+            <div class="timeline-wrapper">
+              <div class="timeline-yr">
+                <a href="{{ education['url'] }}" target="_blank">
+                  <img src="./static/assets/images/logos/{{ education['institute'] | lower | replace(' ','') }}.jpeg"
+                    alt="Logo" class="logo">
+                </a>
+              </div>
+              <div class="timeline-info">
+                <h3><span>{{ education['title'] }}</span><small>{{ education['tenure']['from'] }} - {{
+                    education['tenure']['to'] }}</small></h3>
+                <p>{{ education['grade'] }}
+                </p>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          
           <h2 class="mb-4 mobile-mt-2">Certifications</h2>
           {% for crt in data['certifications'] %}
-          <li>{{ crt }}</li>
+          <li><a href="{{ crt['url'] }}">{{ crt['title'] }}</a></li>
           {% endfor %}
 
-          <h2 class="mb-4 mobile-mt-2">Languages</h2>
+          <h2 class="mb-4 mobile-mt-2">Programming</h2>
           <marquee scrollamount="10">
             {% for lng in data['skillset']['languages'] %}
             <div style="display: inline-block; padding-right: 20px;">
@@ -267,17 +269,11 @@
               <p class="footer-text mb-0"></p>
               <ul>
                 <li>
-                  <a href="https://www.linkedin.com/in/caxefaizan" title="" class="fa-icon">
-                    <i class="fa fa-linkedin"></i>
-                  </a><a href="https://medium.com/@caxefaizan" title="" class="fa-icon">
-                    <i class="fa fa-medium"></i>
-                  </a><a href="https://github.com/caxefaizan" title="" class="fa-icon">
-                    <i class="fa fa-github"></i>
-                  </a><a href="https://stackoverflow.com/users/14091289/caxefaizan" title="" class="fa-icon">
-                    <i class="fa fa-stack-overflow"></i>
-                  </a><a href="http://www.instagram.com/caxefaizan" title="" class="fa-icon">
-                    <i class="fa fa-instagram"></i>
+                  {% for slink in data['socialLinks']%}
+                  <a href="{{ slink['url'] }}" title="" class="fa-icon">
+                    <i class="fa fa-{{ slink['title'] }}"></i>
                   </a>
+                  {% endfor %}
                 </li>
                 <li>
                   <span class="fa-icon">

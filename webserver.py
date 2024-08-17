@@ -48,9 +48,9 @@ def write_to_csv(data):
     message = data["message"]
     try:
         msg = Message(
-            f"{name}", sender=user_id, recipients=["faizanzahid09@hotmail.com"]
+            f"{name}", sender=user_id, recipients=[profile_data["basic"]["email"]]
         )
-        msg.body = f"Hi Faizan,\n{name}: {email} has dropped in the following message for you.\n{message}"
+        msg.body = f"Hi {profile_data['basic']['name']},\n{name}: {email} has dropped in the following message for you.\n{message}"
         mail.send(msg)
     except:
         with open("./database.csv", newline="", mode="a") as database:
