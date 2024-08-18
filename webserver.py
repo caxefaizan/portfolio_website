@@ -9,6 +9,7 @@ from flask import (
 import csv, json
 from datetime import date
 from flask_mail import Mail, Message
+from docwriter import generate_resume_doc
 
 app = Flask(__name__)
 
@@ -30,9 +31,10 @@ mail = Mail(app)
 # route to serve the first .exe file
 @app.route("/download/resume")
 def download_file():
+    generate_resume_doc(profile_data)
     return send_from_directory(
         directory="./static/assets/downloads",
-        path=f'{profile_data["basic"]["name"].lower().replace(" ","")}-resume.pdf',
+        path=f'{profile_data["basic"]["name"].lower().replace(" ","")}-resume.docx',
         as_attachment=True,
     )
 
