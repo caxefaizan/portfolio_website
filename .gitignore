@@ -18,3 +18,5 @@ config.txt
 temp*.*
 database.csv
 profiledata.json
+*-resume.docx
+*-resume.pdf
