@@ -7,24 +7,21 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-  <title>Welcome</title>
+  <title>{{ data['basic']['name'] }}</title>
 
   <link rel="stylesheet" href="./static/css/bootstrap.min.css">
   <link rel="stylesheet" href="./static/css/unicons.css">
   <link rel="stylesheet" href="./static/css/owl.carousel.min.css">
   <link rel="stylesheet" href="./static/css/owl.theme.default.min.css">
-
-  <!-- MAIN STYLE -->
   <link rel="stylesheet" href="./static/css/tooplate-style.css">
-
 </head>
 
 <body>
 
-  <!-- MENU -->
+  <!-- NAVBAR -->
   <nav class="navbar navbar-expand-sm navbar-light">
     <div class="container">
-      <a class="navbar-brand" href="/"><i class='uil uil-user'></i>{{ data['basic']['name'] }}</a>
+      <a class="navbar-brand" href="/"><i class="uil uil-user"></i>{{ data['basic']['name'] }}</a>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,49 +45,38 @@
             <a href="#contact" class="nav-link"><span data-hover="Contact">Contact</span></a>
           </li>
         </ul>
-
-        <ul class="navbar-nav ml-lg-auto">
-          <div class="ml-lg-4">
-            <div class="color-mode d-lg-flex justify-content-center align-items-center">
-              <i class="color-mode-icon"></i>
-              Color mode
-            </div>
-          </div>
-        </ul>
+        <button class="theme-toggle" id="themeToggle" title="Toggle light/dark mode">☀️</button>
       </div>
     </div>
   </nav>
 
-  <!-- ABOUT -->
-  <section class="about full-screen d-lg-flex justify-content-center align-items-center" id="about">
+  <!-- HERO -->
+  <section class="about" id="about">
     <div class="container">
-      <div class="row">
+      <div class="row align-items-center">
 
-        <div class="col-lg-7 col-md-12 col-12 d-flex align-items-center">
+        <div class="col-lg-8 col-12">
           <div class="about-text">
-            <h1 class="animated animated-text">
-              <span class="mr-2">Hey folks, working with</span><br>
-              <marquee scrollamount="18">
-                {% for skill in data['skillset']['frameworks'] %}
-                <span class="animated-item">{{ skill }} | </span>
-                {% endfor %}
-              </marquee>
-            </h1>
+            <div class="hero-meta">
+              <span class="hero-role">Solution Engineer</span>
+              <span class="hero-co">@ Kestra</span>
+            </div>
 
-            <p>Streamlining businesses with optimized workflows and efficient processes.</p>
+            <h1>{{ data['basic']['name'] }}</h1>
+
+            <p>{{ data['basic'].get('tagline', 'Streamlining businesses with optimized workflows and efficient
+              processes.') }}</p>
+
+            <div class="skill-tags">
+              {% for skill in data['skillset']['frameworks'] %}
+              <span class="stag">{{ skill }}</span>
+              {% endfor %}
+            </div>
 
             <div class="custom-btn-group mt-4">
-              <a href="./download/resume" class="btn mr-lg-2 custom-btn"><i class='uil uil-file-alt'></i> Download
-                Resume</a>
+              <a href="./download/resume" class="btn custom-btn"><i class="uil uil-file-alt"></i> Download Resume</a>
               <a href="#contact" class="btn custom-btn custom-btn-bg custom-btn-link">Schedule Meeting</a>
             </div>
-          </div>
-        </div>
-
-        <div class="col-lg-5 col-md-12 col-12">
-          <div class="about-image svg">
-            <img src="./static/assets/images/undraw/undraw_software_engineer_lvl5.svg" class="img-fluid"
-              alt="svg image">
           </div>
         </div>
 
@@ -101,19 +87,17 @@
   <!-- PROJECTS -->
   <section class="project py-5" id="project">
     <div class="container">
-
       <div class="row">
         <div class="col-lg-11 text-center mx-auto col-12">
-
           <div class="col-lg-8 mx-auto">
-            <h2>Side Projects and Blogs</h2>
+            <h2>Side Projects &amp; Blogs</h2>
           </div>
 
           <div class="owl-carousel owl-theme">
             <div class="item">
-              <div class="project-info">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/Ej2Nl4sNstw?si=H_w_koNLmtjSAMTV"
-                  title="YouTube video player" frameborder="0"
+              <div class="project-info" style="position:relative;">
+                <iframe src="https://www.youtube.com/embed/Ej2Nl4sNstw?si=H_w_koNLmtjSAMTV" title="YouTube video player"
+                  frameborder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
               </div>
@@ -121,10 +105,9 @@
             {% for link in data['externallinks'] %}
             <div class="item">
               <div class="project-info">
-                <a href="{{ link['url'] }}"
-                  target="_blank">
-                  <img src="{{ link['imgsource'] }}" alt="Course Thumbnail"
-                    class="img-fluid" style="margin: auto; max-width: fit-content; max-height: fit-content; ">{{ link['title'] }}
+                <a href="{{ link['url'] }}" target="_blank">
+                  <img src="{{ link['imgsource'] }}" alt="{{ link['title'] }}">
+                  <p>{{ link['title'] }}</p>
                 </a>
               </div>
             </div>
@@ -136,61 +119,71 @@
     </div>
   </section>
 
-  <!-- FEATURES -->
-  <section class="resume py-5 d-lg-flex justify-content-center align-items-center" id="resume">
+  <!-- RESUME -->
+  <section class="resume py-5" id="resume">
     <div class="container">
       <div class="row">
 
+        <!-- LEFT: Experience + Training -->
         <div class="col-lg-6 col-12">
-          <h2 class="mb-4">Experience</h2>
 
+          <span class="section-label">Experience</span>
           <div class="timeline">
             {% for experience in data['experiences'] %}
-            {% set positions = experience["positions"] | length %}
             <div class="timeline-wrapper">
-              <div class="timeline-yr">
-                <a href="{{ experience['url'] }}" target="_blank">
-                  <img src="./static/assets/images/logos/{{ experience['companyName'] | lower | replace(' ','') }}.jpeg"
-                    alt="Logo" class="logo">
-                </a>
-              </div>
               <div class="timeline-info">
+                <div class="card-top">
+                  <a href="{{ experience['url'] }}" target="_blank" class="card-logo">
+                    <img src="./static/assets/images/logos/{{ experience['companyName'] | lower | replace(' ','') }}.jpeg"
+                      alt="{{ experience['companyName'] }}"
+                      onerror="this.onerror=null;this.parentElement.innerHTML='<span class=logo-initial>'+this.alt.charAt(0)+'</span>'">
+                  </a>
+                  <p class="company-name">{{ experience['companyName'] }}</p>
+                </div>
                 {% for pos in experience["positions"] %}
-                <h3><span>{{ pos['title'] }}</span><small>{{ pos['tenure']['from'] }} - {{ pos['tenure']['to']
-                    }}</small></h3>
+                <h3>
+                  <span>{{ pos['title'] }}</span>
+                  <small>{{ pos['tenure']['from'] }} – {{ pos['tenure']['to'] }}</small>
+                </h3>
                 {% endfor %}
-                <!-- Add description -->
                 <div class="collapsible">
-                  <button class="toggle-button">Show Details</button>
-                  <div class="content">
-                      {% for val in experience["description"]%}
-                        <li>{{ val }}</li>
-                      {% endfor %}
-                  </div>
+                  <button class="toggle-btn">Show Details</button>
+                  <ul class="exp-desc">
+                    {% for val in experience["description"] %}
+                    <li>{{ val }}</li>
+                    {% endfor %}
+                  </ul>
                 </div>
               </div>
             </div>
             {% endfor %}
           </div>
 
-          <h2 class="mb-4 mobile-mt-2">Soft Skills</h2>
-
+          <span class="section-label">Training &amp; Mentoring</span>
           <div class="timeline">
             {% for ss in data['softskills'] %}
             <div class="timeline-wrapper">
-              <div class="timeline-yr">
-                <a href="{{ ss['url'] }}" target="_blank">
-                  <img src="./static/assets/images/logos/{{ ss['companyName'] | lower | replace(' ','') }}.jpeg"
-                    alt="Logo" class="logo">
-                </a>
-              </div>
               <div class="timeline-info">
-                <h3><span>{{ ss['title'] }}</span><small>{{ ss['tenure']['from'] }} - {{
-                    ss['tenure']['to'] }}</small></h3>
-                {% for val in ss['description'] %}
-                <li>{{ val }}
-                </li>
-                {% endfor %}
+                <div class="card-top">
+                  <a href="{{ ss['url'] }}" target="_blank" class="card-logo">
+                    <img src="./static/assets/images/logos/{{ ss['companyName'] | lower | replace(' ','') }}.jpeg"
+                      alt="{{ ss['companyName'] }}"
+                      onerror="this.onerror=null;this.parentElement.innerHTML='<span class=logo-initial>'+this.alt.charAt(0)+'</span>'">
+                  </a>
+                  <p class="company-name">{{ ss['companyName'] }}</p>
+                </div>
+                <h3>
+                  <span>{{ ss['title'] }}</span>
+                  <small>{{ ss['tenure']['from'] }} – {{ ss['tenure']['to'] }}</small>
+                </h3>
+                <div class="collapsible">
+                  <button class="toggle-btn">Show Details</button>
+                  <ul class="exp-desc">
+                    {% for val in ss['description'] %}
+                    <li>{{ val }}</li>
+                    {% endfor %}
+                  </ul>
+                </div>
               </div>
             </div>
             {% endfor %}
@@ -198,56 +191,60 @@
 
         </div>
 
+        <!-- RIGHT: Education + Certs + Skills -->
         <div class="col-lg-6 col-12">
-          <h2 class="mb-4 mobile-mt-2">Education</h2>
 
+          <span class="section-label">Education</span>
           <div class="timeline">
             {% for education in data['educations'] %}
             <div class="timeline-wrapper">
-              <div class="timeline-yr">
-                <a href="{{ education['url'] }}" target="_blank">
-                  <img src="./static/assets/images/logos/{{ education['institute'] | lower | replace(' ','') }}.jpeg"
-                    alt="Logo" class="logo">
-                </a>
-              </div>
               <div class="timeline-info">
-                <h3><span>{{ education['title'] }}</span><small>{{ education['tenure']['from'] }} - {{
-                    education['tenure']['to'] }}</small></h3>
-                <p>{{ education['grade'] }}
-                </p>
+                <div class="card-top">
+                  <a href="{{ education['url'] }}" target="_blank" class="card-logo">
+                    <img src="./static/assets/images/logos/{{ education['institute'] | lower | replace(' ','') }}.jpeg"
+                      alt="{{ education['institute'] }}"
+                      onerror="this.onerror=null;this.parentElement.innerHTML='<span class=logo-initial>'+this.alt.charAt(0)+'</span>'">
+                  </a>
+                  <p class="company-name">{{ education['institute'] }}</p>
+                </div>
+                <h3>
+                  <span>{{ education['title'] }}</span>
+                  <small>{{ education['tenure']['from'] }} – {{ education['tenure']['to'] }}</small>
+                </h3>
+                <p class="edu-grade">{{ education['grade'] }}</p>
               </div>
             </div>
             {% endfor %}
           </div>
-          
-          <h2 class="mb-4 mobile-mt-2">Certifications</h2>
-          {% for crt in data['certifications'] %}
-          <li><a href="{{ crt['url'] }}">{{ crt['title'] }}</a></li>
-          {% endfor %}
 
-          <h2 class="mb-4 mobile-mt-2">Programming</h2>
-          <marquee scrollamount="10">
+          <span class="section-label">Certifications</span>
+          <ul class="cert-list" style="margin-bottom:2.5rem;">
+            {% for crt in data['certifications'] %}
+            <li><a href="{{ crt['url'] }}">{{ crt['title'] }}</a></li>
+            {% endfor %}
+          </ul>
+
+          <span class="section-label">Programming</span>
+          <div class="skill-grid">
             {% for lng in data['skillset']['languages'] %}
-            <div style="display: inline-block; padding-right: 20px;">
-              <img style="max-width: 75px; max-height: 75px; display:inline-block;"
-                src="./static/assets/images/logos/languages/{{ lng | lower | replace(' ','') }}.jpeg" alt="Logo"
-                class="logo">
-              <p style="text-align: center;">{{ lng }} </p>
-            </div>
+            <span class="skill-pill">
+              <img src="./static/assets/images/logos/languages/{{ lng | lower | replace(' ','') }}.jpeg" alt="{{ lng }}"
+                onerror="this.style.display='none'">
+              {{ lng }}
+            </span>
             {% endfor %}
-          </marquee>
+          </div>
 
-          <h2 class="mb-4 mobile-mt-2">Cloud</h2>
-          <marquee scrollamount="10">
+          <span class="section-label">Cloud</span>
+          <div class="skill-grid">
             {% for cld in data['skillset']['cloud'] %}
-            <div style="display: inline-block; padding-right: 20px;">
-              <img style="max-width: 75px; max-height: 75px; display:inline-block;"
-              src="./static/assets/images/logos/cloud/{{ cld | lower | replace(' ','') }}.jpeg" alt="Logo"
-              class="logo">
-              <p style="text-align: center;">{{ cld }} </p>
-            </div>
+            <span class="skill-pill">
+              <img src="./static/assets/images/logos/cloud/{{ cld | lower | replace(' ','') }}.jpeg" alt="{{ cld }}"
+                onerror="this.style.display='none'">
+              {{ cld }}
+            </span>
             {% endfor %}
-          </marquee>
+          </div>
 
         </div>
 
@@ -260,64 +257,47 @@
     <div class="container">
       <div class="row">
 
-        <div class="col-lg-5 mr-lg-5 col-12">
+        <div class="col-lg-5 col-12">
+          <div class="contact-info-item">
+            <h3>Say hello</h3>
 
-
-          <div class=" d-flex justify-content-between align-items-center py-4 px-lg-5">
-            <div class="contact-info-item">
-              <h3 class="mb-4">Say hello</h3>
-              <p class="footer-text mb-0"></p>
-              <ul>
-                <li>
-                  {% for slink in data['socialLinks']%}
-                  <a href="{{ slink['url'] }}" title="" class="fa-icon">
-                    <i class="fa fa-{{ slink['title'] }}"></i>
-                  </a>
-                  {% endfor %}
-                </li>
-                <li>
-                  <span class="fa-icon">
-                    <i class="fa fa-at" aria-hidden="true"></i>
-                  </span>
-                  <a href="mailto:{{ data['basic']['email'] }}">{{ data['basic']['email'] }}</a>
-                </li>
-                <li>
-                  <span class="fa-icon">
-                    <i class="fa fa fa-map-marker" aria-hidden="true"></i>
-                  </span>
-                  {{ data['basic']['address'] }}
-                </li>
-                <div class="google-map w-100">
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d497699.6907783481!2d77.03989648229923!3d12.954001177395384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka%2C%20India!5e0!3m2!1sen!2sus!4v1723370534463!5m2!1sen!2sus"
-                    width="300" height="225" style="border:0;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-              </ul>
+            <div class="social-row">
+              {% for slink in data['socialLinks'] %}
+              <a href="{{ slink['url'] }}" title="{{ slink['title'] }}" class="fa-icon">
+                <i class="fa fa-{{ slink['title'] }}"></i>
+              </a>
+              {% endfor %}
             </div>
-          </div>
 
+            <ul>
+              <li>
+                <span class="fa-icon"><i class="fa fa-at"></i></span>
+                <a href="mailto:{{ data['basic']['email'] }}">{{ data['basic']['email'] }}</a>
+              </li>
+              <li>
+                <span class="fa-icon"><i class="fa fa-map-marker"></i></span>
+                {{ data['basic']['address'] }}
+              </li>
+            </ul>
+          </div>
         </div>
 
         <div class="col-lg-6 col-12">
           <div class="contact-form">
-            <h2 class="mb-4">Excited to work together? Let's talk</h2>
+            <h2>Excited to work together? Let's talk</h2>
 
             <form action="submit_form" method="post">
               <div class="row">
                 <div class="col-lg-6 col-12">
                   <input type="text" class="form-control" name="name" placeholder="Your Name" id="name">
                 </div>
-
                 <div class="col-lg-6 col-12">
                   <input type="email" class="form-control" name="email" placeholder="Email" id="email">
                 </div>
-
                 <div class="col-12">
                   <textarea name="message" rows="6" class="form-control" id="message" placeholder="Message"></textarea>
                 </div>
-
-                <div class="ml-lg-auto col-lg-5 col-12">
+                <div class="col-lg-5 col-12 ml-lg-auto">
                   <input type="submit" class="form-control submit-btn" value="Send">
                 </div>
               </div>
@@ -333,30 +313,33 @@
   <footer class="footer py-5">
     <div class="container">
       <div class="row">
-
         <div class="col-lg-12 col-12">
-          <p class="copyright-text text-center">2024</p>
+          <p class="copyright-text">© 2026 {{ data['basic']['name'] }}</p>
         </div>
-
       </div>
     </div>
   </footer>
 
   <script>
-    document.querySelectorAll('.toggle-button').forEach(function(button) {
-    button.addEventListener('click', function() {
-        const content = this.parentElement.querySelector('.content');
-        this.parentElement.classList.toggle('active');
-
-        if (this.parentElement.classList.contains('active')) {
-            this.textContent = 'Hide Details';
-        } else {
-            this.textContent = 'Show Details';
-        }
+    document.querySelectorAll('.toggle-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var col = this.closest('.collapsible');
+        col.classList.toggle('open');
+        this.textContent = col.classList.contains('open') ? 'Hide Details' : 'Show Details';
+      });
     });
-});
-  </script>
 
+    (function () {
+      var btn = document.getElementById('themeToggle');
+      var saved = localStorage.getItem('theme');
+      if (saved === 'light') { document.body.classList.add('light-mode'); btn.textContent = '🌙'; }
+      btn.addEventListener('click', function () {
+        var isLight = document.body.classList.toggle('light-mode');
+        btn.textContent = isLight ? '🌙' : '☀️';
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      });
+    })();
+  </script>
   <script src="./static/js/jquery-3.3.1.min.js"></script>
   <script src="./static/js/popper.min.js"></script>
   <script src="./static/js/bootstrap.min.js"></script>
@@ -365,6 +348,7 @@
   <script src="./static/js/owl.carousel.min.js"></script>
   <script src="./static/js/smoothscroll.js"></script>
   <script src="./static/js/custom.js"></script>
+
 </body>
 
 </html>
