@@ -183,6 +183,13 @@ ul li {
   border-bottom: 1px solid var(--border);
 }
 
+.hero-illustration {
+  width: 100%;
+  max-width: 420px;
+  opacity: 0.92;
+  filter: drop-shadow(0 8px 32px rgba(0,0,0,0.4));
+}
+
 .about-text h1 {
   font-family: var(--font-mono);
   font-size: clamp(1.8rem, 4vw, 2.8rem);
