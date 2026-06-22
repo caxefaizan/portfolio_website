@@ -3,26 +3,28 @@ from flask import (
     render_template,
     request,
     send_from_directory,
-    redirect,
-    url_for,
+    Response,
 )
-import csv, json
+import csv, json, os
 from datetime import date
 from flask_mail import Mail, Message
 from docwriter import generate_resume_doc
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 
-with open("./profiledata.json", "r") as fp:
-    profile_data = json.loads(fp.read())
-with open("./config.txt", "r") as fp:
-    conf = fp.read()
+_dir = os.path.dirname(os.path.abspath(__file__))
 
-user_id = "caxedummy@gmail.com"
+with open(os.path.join(_dir, "profiledata.json"), "r") as fp:
+    profile_data = json.loads(fp.read())
+
+user_id = os.environ["MAIL_USERNAME"]
 app.config["MAIL_SERVER"] = "smtp.gmail.com"
 app.config["MAIL_PORT"] = 465
 app.config["MAIL_USERNAME"] = user_id
-app.config["MAIL_PASSWORD"] = conf
+app.config["MAIL_PASSWORD"] = os.environ["MAIL_PASSWORD"]
 app.config["MAIL_USE_SSL"] = True
 
 mail = Mail(app)
@@ -42,6 +44,27 @@ def download_file():
 @app.route("/")
 def webpage():
     return render_template("index.html", data=profile_data)
+
+
+@app.route("/robots.txt")
+def robots():
+    site_url = profile_data["basic"]["site_url"]
+    body = f"User-agent: *\nAllow: /\nSitemap: {site_url}/sitemap.xml\n"
+    return Response(body, mimetype="text/plain")
+
+
+@app.route("/sitemap.xml")
+def sitemap():
+    site_url = profile_data["basic"]["site_url"]
+    body = f"""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>{site_url}/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>"""
+    return Response(body, mimetype="application/xml")
 
 
 def write_to_csv(data):
@@ -64,15 +87,12 @@ def write_to_csv(data):
 
 @app.route("/submit_form", methods=["POST"])
 def submit_form():
-    if request.method == "POST":
-        try:
-            data = request.form.to_dict()
-            write_to_csv(data)
-        except Exception as e:
-            return str(e) + "did not save in database"
-    else:
-        print("Something wrong")
-    return redirect(url_for("webpage"))
+    try:
+        data = request.form.to_dict()
+        write_to_csv(data)
+        return "", 200
+    except Exception as e:
+        return str(e), 500
 
 
 if __name__ == "__main__":
