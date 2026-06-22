@@ -3,19 +3,19 @@ from flask import (
     render_template,
     request,
     send_from_directory,
-    redirect,
-    url_for,
 )
-import csv, json
+import csv, json, os
 from datetime import date
 from flask_mail import Mail, Message
 from docwriter import generate_resume_doc
 
 app = Flask(__name__)
 
-with open("./profiledata.json", "r") as fp:
+_dir = os.path.dirname(os.path.abspath(__file__))
+
+with open(os.path.join(_dir, "profiledata.json"), "r") as fp:
     profile_data = json.loads(fp.read())
-with open("./config.txt", "r") as fp:
+with open(os.path.join(_dir, "config.txt"), "r") as fp:
     conf = fp.read()
 
 user_id = "caxedummy@gmail.com"
@@ -64,15 +64,12 @@ def write_to_csv(data):
 
 @app.route("/submit_form", methods=["POST"])
 def submit_form():
-    if request.method == "POST":
-        try:
-            data = request.form.to_dict()
-            write_to_csv(data)
-        except Exception as e:
-            return str(e) + "did not save in database"
-    else:
-        print("Something wrong")
-    return redirect(url_for("webpage"))
+    try:
+        data = request.form.to_dict()
+        write_to_csv(data)
+        return "", 200
+    except Exception as e:
+        return str(e), 500
 
 
 if __name__ == "__main__":

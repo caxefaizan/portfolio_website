@@ -33,4 +33,21 @@
     // TOOLTIP
     $('.social-links a').tooltip();
 
+    // CONTACT FORM — AJAX SUBMIT
+    $('form[action="submit_form"]').on('submit', function (e) {
+      e.preventDefault();
+      var form = this;
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      fetch('submit_form', { method: 'POST', body: new FormData(form) })
+        .then(function () {
+          form.reset();
+          $('html, body').animate({ scrollTop: $('#contact').offset().top - 49 }, 600, function () {
+            $('#contact-success-banner').fadeIn(300);
+          });
+        })
+        .catch(function () {
+          alert('Something went wrong. Please try again.');
+        });
+    });
+
 })(jQuery);

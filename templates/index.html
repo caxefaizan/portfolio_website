@@ -291,16 +291,20 @@
           <div class="contact-form">
             <h2>Excited to work together? Let's talk</h2>
 
+            <div id="contact-success-banner" style="display:none; background:#4CAF50; color:#fff; padding:12px 16px; border-radius:6px; margin-bottom:16px;">
+              Thanks for reaching out! I'll get back to you soon.
+            </div>
+
             <form action="submit_form" method="post">
               <div class="row">
                 <div class="col-lg-6 col-12">
-                  <input type="text" class="form-control" name="name" placeholder="Your Name" id="name">
+                  <input type="text" class="form-control" name="name" placeholder="Your Name" id="name" required>
                 </div>
                 <div class="col-lg-6 col-12">
-                  <input type="email" class="form-control" name="email" placeholder="Email" id="email">
+                  <input type="email" class="form-control" name="email" placeholder="Email" id="email" required>
                 </div>
                 <div class="col-12">
-                  <textarea name="message" rows="6" class="form-control" id="message" placeholder="Message"></textarea>
+                  <textarea name="message" rows="6" class="form-control" id="message" placeholder="Message" required></textarea>
                 </div>
                 <div class="col-lg-5 col-12 ml-lg-auto">
                   <input type="submit" class="form-control submit-btn" value="Send">
