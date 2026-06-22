@@ -3,6 +3,7 @@ from flask import (
     render_template,
     request,
     send_from_directory,
+    Response,
 )
 import csv, json, os
 from datetime import date
@@ -42,6 +43,27 @@ def download_file():
 @app.route("/")
 def webpage():
     return render_template("index.html", data=profile_data)
+
+
+@app.route("/robots.txt")
+def robots():
+    site_url = profile_data["basic"]["site_url"]
+    body = f"User-agent: *\nAllow: /\nSitemap: {site_url}/sitemap.xml\n"
+    return Response(body, mimetype="text/plain")
+
+
+@app.route("/sitemap.xml")
+def sitemap():
+    site_url = profile_data["basic"]["site_url"]
+    body = f"""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>{site_url}/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>"""
+    return Response(body, mimetype="application/xml")
 
 
 def write_to_csv(data):

@@ -4,10 +4,50 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="robots" content="index, follow">
+
+  {% set _skills = (data['skillset']['frameworks'] + data['skillset']['languages'] + data['skillset']['cloud']) | join(', ') %}
+  {% set _desc = data['basic']['name'] ~ ' — Solution Engineer specializing in ' ~ _skills ~ '. ' ~ data['basic']['tagline'] %}
+  {% set _url  = data['basic']['site_url'] %}
+  {% set _current_role = data['experiences'][0] %}
+
+  <title>{{ data['basic']['name'] }} | {{ _current_role['positions'][0]['title'] }} @ {{ _current_role['companyName'] }}</title>
+  <meta name="description" content="{{ _desc }}">
+  <meta name="author" content="{{ data['basic']['name'] }}">
+  <meta name="keywords" content="{{ data['basic']['name'] }}, {{ _skills }}, Solution Engineer, workflow automation, portfolio">
+
+  <link rel="canonical" href="{{ _url }}">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="profile">
+  <meta property="og:url"         content="{{ _url }}">
+  <meta property="og:title"       content="{{ data['basic']['name'] }} | {{ _current_role['positions'][0]['title'] }}">
+  <meta property="og:description" content="{{ _desc }}">
+  <meta property="profile:first_name" content="{{ data['basic']['name'].split()[0] }}">
+  <meta property="profile:last_name"  content="{{ data['basic']['name'].split()[-1] }}">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary">
+  <meta name="twitter:title"       content="{{ data['basic']['name'] }} | {{ _current_role['positions'][0]['title'] }}">
+  <meta name="twitter:description" content="{{ _desc }}">
+
+  <!-- JSON-LD Person schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "{{ data['basic']['name'] }}",
+    "url": "{{ _url }}",
+    "email": "{{ data['basic']['email'] }}",
+    "jobTitle": "{{ _current_role['positions'][0]['title'] }}",
+    "worksFor": { "@type": "Organization", "name": "{{ _current_role['companyName'] }}", "url": "{{ _current_role['url'] }}" },
+    "address": { "@type": "PostalAddress", "addressLocality": "{{ data['basic']['address'] }}" },
+    "sameAs": [{% for sl in data['socialLinks'] %}"{{ sl['url'] }}"{% if not loop.last %},{% endif %}{% endfor %}],
+    "knowsAbout": [{% for s in (data['skillset']['frameworks'] + data['skillset']['languages'] + data['skillset']['cloud']) %}"{{ s }}"{% if not loop.last %},{% endif %}{% endfor %}]
+  }
+  </script>
+
   <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-  <title>{{ data['basic']['name'] }}</title>
 
   <link rel="stylesheet" href="./static/css/bootstrap.min.css">
   <link rel="stylesheet" href="./static/css/unicons.css">
