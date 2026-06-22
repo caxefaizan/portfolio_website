@@ -9,6 +9,9 @@ import csv, json, os
 from datetime import date
 from flask_mail import Mail, Message
 from docwriter import generate_resume_doc
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 
@@ -16,14 +19,12 @@ _dir = os.path.dirname(os.path.abspath(__file__))
 
 with open(os.path.join(_dir, "profiledata.json"), "r") as fp:
     profile_data = json.loads(fp.read())
-with open(os.path.join(_dir, "config.txt"), "r") as fp:
-    conf = fp.read()
 
-user_id = "caxedummy@gmail.com"
+user_id = os.environ["MAIL_USERNAME"]
 app.config["MAIL_SERVER"] = "smtp.gmail.com"
 app.config["MAIL_PORT"] = 465
 app.config["MAIL_USERNAME"] = user_id
-app.config["MAIL_PASSWORD"] = conf
+app.config["MAIL_PASSWORD"] = os.environ["MAIL_PASSWORD"]
 app.config["MAIL_USE_SSL"] = True
 
 mail = Mail(app)

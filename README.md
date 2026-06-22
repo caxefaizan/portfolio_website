@@ -12,15 +12,23 @@ python3 -m venv .venv
 source .venv/bin/activate
 python3 -m pip install -r requirements.txt
 ```
-3. Create your profile data as `profiledata.json` in the following format
+3. Create a `.env` file with your Gmail credentials (used by the contact form to send emails):
+```
+MAIL_USERNAME=you@gmail.com
+MAIL_PASSWORD=your-gmail-app-password
+```
+> Generate an app password at https://myaccount.google.com/apppasswords (requires 2FA enabled).
+4. Create your profile data as `profiledata.json` in the following format
 ```json
 {
   "basic": {
-    "name": "John DOe",
+    "name": "John Doe",
     "email": "john@example.com",
     "contact": "+1234567890",
     "social": "linkedin.com/in/dummy",
-    "address": "XX, yy, ZZ"
+    "address": "City, State, Country",
+    "tagline": "One line describing what you do.",
+    "site_url": "https://yourdomain.com"
   },
   "skillset": {
     "frameworks": [
@@ -114,7 +122,7 @@ python3 -m pip install -r requirements.txt
   ]
 }
 ```
-4. Run the server
+5. Run the server
 ```shell
 flask --app webserver run --debug
 ```
