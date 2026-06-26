@@ -31,11 +31,14 @@ mail = Mail(app)
 
 
 # route to serve the first .exe file
+_downloads_dir = os.path.join(_dir, "static", "assets", "downloads")
+
+
 @app.route("/download/resume")
 def download_file():
-    generate_resume_doc(profile_data)
+    generate_resume_doc(profile_data, _downloads_dir)
     return send_from_directory(
-        directory="./static/assets/downloads",
+        directory=_downloads_dir,
         path=f'{profile_data["basic"]["name"].lower().replace(" ","")}-resume.docx',
         as_attachment=True,
     )

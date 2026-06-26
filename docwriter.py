@@ -1,10 +1,10 @@
 from docx import Document
-import json
+import json, os
 from common import set_margin, stylize
 import datetime
 
 
-def generate_resume_doc(profile_data):
+def generate_resume_doc(profile_data, downloads_dir=None):
     # Create a new Document
     doc = Document()
 
@@ -121,5 +121,7 @@ def generate_resume_doc(profile_data):
             stylize(desc_run_normal, size=10)
 
     # Save the document
-    mydate = datetime.datetime.now().strftime("%B-%Y")
-    doc.save(f'./static/assets/downloads/{profile_data["basic"]["name"].lower().replace(" ","")}-resume.docx')
+    if downloads_dir is None:
+        downloads_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'assets', 'downloads')
+    os.makedirs(downloads_dir, exist_ok=True)
+    doc.save(os.path.join(downloads_dir, f'{profile_data["basic"]["name"].lower().replace(" ","")}-resume.docx'))
